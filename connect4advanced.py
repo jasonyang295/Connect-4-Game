@@ -1,7 +1,10 @@
 #we are now going to create the finished version of the game with better graphics
 
+import sys
 import numpy as np
 import pygame 
+BLUE = (0,0,255)
+BLACK = (0,0,0)
 
 from numpy.lib.function_base import piecewise
 ROW_COUNT = 6
@@ -42,13 +45,19 @@ def drop_piece(board, row, col, piece):
     board[row][col] = piece
 	#not double equals just one to assign
 
-def is_valid_location():
+def is_valid_location(board, col):
     return board[5][col] == 0
 
 def get_next_open_row(board, col):
     for r in range(ROW_COUNT):
     		if board[r][col] == 0:
     				return r
+
+def drawtheboard():
+    for c in range(COL_COUNT):
+        for r in range(ROW_COUNT):
+            pygame.draw.rect(screen, BLUE, (c*SQUARESIZE, r*SQUARESIZE + SQUARESIZE, SQUARESIZE, SQUARESIZE) )
+            pygame.draw.circle(screen, BLACK, int((c*SQUARESIZE + SQUARESIZE/2)), int((r*SQUARESIZE + SQUARESIZE + SQUARESIZE/2 )), RADIUS)
 
 def print_board(board):
     	print(np.flip(board, 0))
@@ -64,34 +73,39 @@ width = COL_COUNT * SQUARESIZE
 height = (ROW_COUNT+1) * SQUARESIZE
 size = (width, height)
 screen = pygame.display.set_mode(size)
+RADIUS = int(SQUARESIZE/2 - 5)
 
 
 
 while not game_over: 
-	#ask for player 1 input
-	if turn == 0: 
-		col = int(input("Player 1, please make your selection (0-6):"))
-		if is_valid_location(board, col):
-    			row = get_next_open_row(board, col)
-			drop_piece(board, row, col, 1)
-		
-		if checkwin(board, 1):
-    			print("Player1 has won")
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+	        #ask for player 1 input
+            if turn == 0: 
+                col = int(input("Player 1, please make your selection (0-6):"))
+                if is_valid_location(board, col):
+                        row = get_next_open_row(board, col)
+                        drop_piece(board, row, col, 1)
+                
+                if checkwin(board, 1):
+                        print("Player1 has won")
 
-	#ask for player 2 input
-	else: 
-		col = int(input("Player 2, please make your selection (0-6):"))
-		if is_valid_location(board, col):
-    			row = get_next_open_row(board, col)
-			drop_piece(board, row, col, 2)
-			
-		if checkwin(board, 2):
-    			print("Player2 has won")
+            #ask for player 2 input
+            else: 
+                col = int(input("Player 2, please make your selection (0-6):"))
+                if is_valid_location(board, col):
+                        row = get_next_open_row(board, col)
+                        drop_piece(board, row, col, 2)
+                    
+                if checkwin(board, 2):
+                        print("Player2 has won")
 
 
 
-	turn += 1
-	turn = turn % 2
+            turn += 1
+            turn = turn % 2
 
 
 

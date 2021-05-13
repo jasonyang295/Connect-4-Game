@@ -1,4 +1,6 @@
 import numpy as np
+import pygame 
+
 from numpy.lib.function_base import piecewise
 ROW_COUNT = 6
 COL_COUNT = 7
@@ -77,3 +79,7 @@ while not game_over:
 
 	turn += 1
 	turn = turn % 2
+
+
+#everything above is the cmd line version of c4
+

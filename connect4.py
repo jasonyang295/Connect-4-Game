@@ -7,7 +7,8 @@ def create_board():
 	 return board
 
 def drop_piece(board, row, col, piece):
-    board[row][col] == piece
+    board[row][col] = piece
+	#not double equals just one to assign
 
 def is_valid_location():
     return board[5][col] == 0
@@ -17,7 +18,8 @@ def get_next_open_row(board, col):
     		if board[r][col] == 0:
     				return r
 
-
+def print_board(board):
+    	print(np.flip(board, 0))
 
 board = create_board()
 turn = 0

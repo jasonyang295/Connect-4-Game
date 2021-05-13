@@ -58,6 +58,12 @@ turn = 0
 game_over = False
 
 
+pygame.init()
+SQUARESIZE = 100
+width = COL_COUNT * SQUARESIZE
+height = (ROW_COUNT+1) * SQUARESIZE
+size = (width, height)
+screen = pygame.display.set_mode(size)
 
 
 

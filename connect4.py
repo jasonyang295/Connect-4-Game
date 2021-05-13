@@ -18,10 +18,18 @@ def checkwin(board, piece):
 				if board[r][c] == piece and board[r+1][c] == piece and board[r+2][c] == piece and board[r+3][c] == piece: #here we check if there are 4 consecutive pieces which = win
     					return True
 
-		#now we need to check for positively sloped diagonals
-		
+		#now we need to check for positively sloped diagonals 
+		for c in range(COL_COUNT - 3): #this is cus diagonals stop at the 3rd to last row
+			for r in range(ROW_COUNT - 3): #now we can't have the top rows for vertical win for the diagonals
+				if board[r][c] == piece and board[r+1][c+1] == piece and board[r+2][c+2] == piece and board[r+3][c+4] == piece: #here we check if there are 4 consecutive pieces which = win
+    					return True
 
 		#now we check for negatively sloped diagonal
+		for c in range(COL_COUNT -3): 
+			for r in range(3, ROW_COUNT): #negatively sloped diagonals can only start so far up
+				if board[r][c] == piece and board[r-1][c+1] == piece and board[r-2][c+2] == piece and board[r-3][c+3] == piece: #here we check if there are 4 consecutive pieces which = win
+    					return True
+
 def create_board():
 	 board = np.zeros((ROW_COUNT, COL_COUNT))
 	 return board

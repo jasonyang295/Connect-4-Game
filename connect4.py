@@ -54,6 +54,11 @@ def print_board(board):
 board = create_board()
 turn = 0
 game_over = False
+
+
+
+
+
 while not game_over: 
 	#ask for player 1 input
 	if turn == 0: 
@@ -81,5 +86,7 @@ while not game_over:
 	turn = turn % 2
 
 
-#everything above is the cmd line version of c4
+#everything above is the cmd line of c4 excluding pygame
+
+
 
